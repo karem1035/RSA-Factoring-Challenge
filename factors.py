@@ -12,4 +12,4 @@ for i in file:
             continue
         break
     print(f"{i}={int(i / prime)}*{prime}")
-        
+

@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+
+import sys
+
+def factorize(number):
+    factors = []
+    for i in range(2, number + 1):
+        while number % i == 0:
+            factors.append(i)
+            number //= i
+    return factors
+
+def main():
+    # Check if the correct number of command-line arguments is provided
+    if len(sys.argv) != 2:
+        print("Usage: {} <file>".format(sys.argv[0]))
+        sys.exit(1)
+
+    input_file = sys.argv[1]
+
+    try:
+        with open(input_file, "r") as file:
+            for line in file:
+                num = int(line.strip())
+                factors = factorize(num)
+                if len(factors) >= 2:
+                    p, q = factors[0], factors[1]
+                    print("{}={}={}".format(num, p, q))
+    except FileNotFoundError:
+        print("File '{}' not found.".format(input_file))
+    except ValueError:
+        print("Invalid input in the file. Make sure each line contains a valid natural number.")
+
+if __name__ == "__main__":
+    main()
